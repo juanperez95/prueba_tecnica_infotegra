@@ -5,21 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Editar</title>
+    {{--Icono favicon--}}
+    <link rel="icon" href="{{asset('assets/favicon.ico')}}" type="image/x-icon">
+    <title>{{$personaje->name}}</title>
+    {{--Importar los metodos para que funcione livewire y wireui--}}
     @livewireStyles
     @wireUiScripts
     @livewireScripts 
+    {{--Llamar css de estilos globales--}}
+    <link rel="stylesheet" href="{{asset('css/generales.css')}}">
 </head>
 <body class="">
+    {{--Titulo de la barra inicial--}}
     <section class="bg-slate-800">
         <article class="flex flex-row justify-center items-center bg-black">
-                <img src="{{asset('assets/title.png')}}" alt="title" class="size-50 w-100 h-30">
+                <img src="{{asset('assets/title.png')}}" alt="title" class="size-50 w-100 h-30 title">
         </article>
     </section>
-    {{--Section principalpara tener el orden de la pagina--}}
-    <section class="grid grid-cols-2 gap-5 p-20">
+    {{--Seccion principal para tener el orden de la pagina--}}
+    <section class="grid grid-cols-2 gap-3 p-10">
         <section class="flex justify-center items-center p-6">
-            <img src="{{$personaje->image}}" alt="{{$personaje->name}}" class="w-60 h-60 rounded-full" />
+            <img src="{{$personaje->image}}" alt="{{$personaje->name}}" class="w-60 h-60 rounded-full imagenes" />
             <h2 class="text-2xl text-center m-10">{{$personaje->name}}</h2>
         </section>
         {{-- Formulario de edicion para el personaje --}}
@@ -54,6 +60,15 @@
                 </form>
             </article>
         </section>
+    </section>
+    {{--Seccion para el pie de pagina--}}
+    <section class="bg-black text-white h-33 flex justify-center items-center">
+        <article class="text-white p-5 flex flex-col justify-between items-center gap-10">
+            {{--Imagen de infotegra para citar quien hace la prueba tecnica--}}
+            <a href="https://www.infotegra.com/" target="_blank">
+                <img src="{{asset('assets/infotegra.png')}}" alt="infotegra" class="">
+            </a>
+        </article>
     </section>
 </body>
 </html>

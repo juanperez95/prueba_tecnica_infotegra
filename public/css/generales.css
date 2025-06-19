@@ -1,0 +1,90 @@
+.imagenes{
+    transition: all 0.3s ease-in-out;
+    transform: scale(1);
+}
+
+.imagenes:hover{
+    transform: scale(1.1);
+}
+
+/* Animar el titulo de la pagina
+*/
+
+.title{
+    transition: all 0.3s ease-in-out;
+    transform: scale(1);
+    animation-name: move_title;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes move_title{
+    0%{
+        transform: scale(1);
+    }
+    50%{
+        transform: scale(0.90);
+    }
+    100%{
+        transform: scale(1);
+    }
+}
+
+
+/* Fuente de la pagina */
+
+@font-face {
+    font-family: 'Fuente';
+    src: url(../fonts/BebasNeue-Regular.ttf);
+    font-weight: bold;
+    font-style: normal;
+}
+
+body{
+    font-family: 'Fuente', sans-serif;
+    font-size: 1.1rem;
+}
+
+/* Animar el portal de la pagina */
+.portal{
+    transition: all 0.3s ease-in-out;
+    transform:rotate(0deg);
+    transform-origin: center;
+    animation-name: move_portal;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes move_portal{
+    0%{
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+
+/* Animacion de la nave */
+.nave{
+    transition: all 0.3s ease-in-out;
+    transform:translateY(0px);
+    transform-origin: center;
+    animation-name: move_nave;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes move_nave{
+    0%{
+        transform: translateY(0px);
+    }
+    50%{
+        transform: translateY(-10px);
+    }
+    100%{
+        transform: translateY(0px);
+    }
+}

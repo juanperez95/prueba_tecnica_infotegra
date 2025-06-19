@@ -26,12 +26,12 @@ final class PersonajesTable extends PowerGridComponent
             PowerGrid::header()
                 ->showSearchInput(),
             PowerGrid::footer()
-                ->showPerPage()
+                ->showPerPage(7) // Ajustar el contenido mostrado por pagina de la tabla
                 ->showRecordCount(),
-            PowerGrid::detail()
-                ->view('livewire.detalle')
+            PowerGrid::detail() // Ajustar el datatable para que tenga las opciones de detalle
+                ->view('livewire.detalle') // Renderiza vista 'detalle.blade' para mostrar los detalles
                 ->showCollapseIcon()
-                ->params([
+                ->params([ // Se envia id para renderizar los detalles de  un personaje
                     'id'=>'id',
                 ])];
     }
@@ -62,6 +62,7 @@ final class PersonajesTable extends PowerGridComponent
 
     public function columns(): array
     {
+        // Crear y definir las columnas de la tabla
         return [
             Column::make('ID','id')->sortable()->searchable(),
             // Crear y definir las columnas de la tabla

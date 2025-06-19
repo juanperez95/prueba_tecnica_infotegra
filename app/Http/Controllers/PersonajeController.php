@@ -60,6 +60,11 @@ class PersonajeController extends Controller
         $personaje->save();
         return redirect()->route('getPersonajes');
 
-
     }
+
+    // Funcion para eliminar toda la base de datos y volver al consumo de la api
+    public function limpiar_datos(Request $request){
+        Personaje::truncate(); // Reinicio total de la tabla de personajes
+        return redirect()->route('getPersonajes');
+    } 
 }

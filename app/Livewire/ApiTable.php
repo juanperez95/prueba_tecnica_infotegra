@@ -8,12 +8,16 @@ use Illuminate\Support\Facades\Http;
 use PowerComponents\LivewirePowerGrid\Column;
 use PowerComponents\LivewirePowerGrid\Button;
 use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
+use PowerComponents\LivewirePowerGrid\Facades\Rule;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+
 
 final class ApiTable extends PowerGridComponent
 {
     public string $tableName = 'api-table-9myxn6-table';
+
+    public bool $deferLoading = true;
 
     public function datasource(): Collection
     {
@@ -23,7 +27,7 @@ final class ApiTable extends PowerGridComponent
             $numero_registros[] = $i+1; // Llenar el array con los 100 registros
         }
         $data_api = Http::get('https://rickandmortyapi.com/api/character/'.json_encode($numero_registros));
-        return collect($data_api->json());
+        return collect($data_api->json()); // Devolver la coleccion json para iterar los elementos de la api
     }
 
     public function setUp(): array
@@ -34,31 +38,33 @@ final class ApiTable extends PowerGridComponent
             PowerGrid::header()
                 ->showSearchInput(),
             PowerGrid::footer()
-                ->showPerPage()
+                ->showPerPage(7) // Ajustar el contenido mostrado por pagina de la tabla
                 ->showRecordCount(),
 
             // Mostrar detalles 
             PowerGrid::detail()
-                ->view('livewire.detalle')
+                ->view('livewire.detalle') // vista en la que se renderiza los detalles
                 ->showCollapseIcon()
                 ->params([
                     'id'=>'id',
-                ])
+                ]),
 
         ];
     }
 
     public function fields(): PowerGridFields
     {
-        return PowerGrid::fields()
+        return PowerGrid::fields() // Mostrar los campos de la tabla con los datos de la API
             ->add('id')
-            ->add('image',fn($personaje) => "<img src='{$personaje->image}' alt='Personaje' class='w-15 h-15 rounded-full' />")
+            ->add('image',fn($personaje) => "<img src='{$personaje->image}' alt='Personaje' class='w-15 h-15 rounded-full imagenes' />")
             ->add('name')
+            ->add('status')
             ->add('species');
     }
 
     public function columns(): array
     {
+        // Construir las columnas
         return [
             Column::make('ID', 'id')
                 ->searchable()
@@ -70,15 +76,18 @@ final class ApiTable extends PowerGridComponent
                 ->searchable()
                 ->sortable(),
 
+            Column::make('Estado', 'status'),
+
             Column::make('Especie', 'species')
                 ->sortable(),
 
-            Column::action('Action')
+            Column::action(title: 'Acciones')
         ];
     }
 
     public function actions($row): array
     {
+        // Mostrar boton para ver detalles, en base la la vista 'detalle.blade'
         return [
             Button::add('detail')
                 ->slot('Detalles')
@@ -86,5 +95,5 @@ final class ApiTable extends PowerGridComponent
                 ->toggleDetail($row->id)
         ];
     }
-                
+
 }
