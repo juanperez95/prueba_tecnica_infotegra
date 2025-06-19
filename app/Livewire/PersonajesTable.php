@@ -13,7 +13,8 @@ use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
 
-final class PersonajesTable extends PowerGridComponent
+
+final class PersonajesTable extends PowerGridComponent 
 {
     public string $tableName = 'personajes-table-k9aivi-table';
 
@@ -27,13 +28,20 @@ final class PersonajesTable extends PowerGridComponent
             PowerGrid::footer()
                 ->showPerPage()
                 ->showRecordCount(),
-        ];
+            PowerGrid::detail()
+                ->view('livewire.detalle')
+                ->showCollapseIcon()
+                ->params([
+                    'id'=>'id',
+                ])];
     }
 
-    public function datasource(): Builder
+    public function datasource()
     {
         // Construir la tabla con los datos de la base de datos
         return Personaje::query(); 
+
+
     }
 
     public function relationSearch(): array
@@ -49,11 +57,7 @@ final class PersonajesTable extends PowerGridComponent
             ->add('name')
             ->add('status')
             ->add('species')
-            ->add('image', fn ($personaje) => "<img src='{$personaje->image}' alt='Personaje' class='w-15 h-15 rounded-full' />")
-            ->add('type')
-            ->add('gender')
-            ->add('origin_name')
-            ->add('origin_url');
+            ->add('image', fn ($personaje) => "<img src='{$personaje->image}' alt='Personaje' class='w-15 h-15 rounded-full' />");
     }
 
     public function columns(): array
@@ -63,10 +67,12 @@ final class PersonajesTable extends PowerGridComponent
             // Crear y definir las columnas de la tabla
             Column::make('Personaje', 'image')
                 ->sortable()
+                ->bodyAttribute('class','w-15 h-15 rounded-full')
                 ->searchable(),
 
             Column::make('Nombre', 'name')
                 ->sortable()
+                ->bodyAttribute('class','w-15 h-15 rounded-full')
                 ->searchable(),
 
             Column::make('Estado', 'status')
@@ -74,23 +80,6 @@ final class PersonajesTable extends PowerGridComponent
                 ->searchable(),
 
             Column::make('Especie', 'species')
-                ->sortable()
-                ->searchable(),
-
-
-            Column::make('Tipo', 'type')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Genero', 'gender')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Origen personaje', 'origin_name')
-                ->sortable()
-                ->searchable(),
-
-            Column::make('Localizacion', 'origin_url')
                 ->sortable()
                 ->searchable(),
 
@@ -106,9 +95,9 @@ final class PersonajesTable extends PowerGridComponent
 
     #[\Livewire\Attributes\On('edit')]
     // Funcion para editar 
-    public function edit($rowId): void
+    public function edit($rowId)
     {
-        $this->js('console.log('.$rowId.')');
+        return redirect()->route('editarPersonaje',['id'=>$rowId]);
     }
 
     public function actions($row): array
@@ -118,8 +107,14 @@ final class PersonajesTable extends PowerGridComponent
             Button::add('edit')
                 ->slot('Editar')
                 ->id('edit-'.$row->id)
-                ->class('bg-blue-500 duration-150 transition-ease-in-out hover:bg-blue-700 text-white font-bold py-2 px-4 rounded')
+                ->class('bg-slate-500 duration-150 transition-ease-in-out hover:bg-slate-700 text-white font-bold py-2 px-4 rounded')
                 ->dispatch('edit', ['rowId' => $row->id]),
+
+            // Boton de detalles de personaje
+            Button::add('detail')
+                ->slot('Detalles')
+                ->class('bg-green-500 duration-150 transition-ease-in-out hover:bg-green-700 text-white font-bold py-2 px-4 rounded')
+                ->toggleDetail($row->id)
         ];
     }
 

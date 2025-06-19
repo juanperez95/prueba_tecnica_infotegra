@@ -41,7 +41,7 @@ class Boton extends Component
             {{-- A good traveler has no fixed plans and is not intent upon arriving. --}}
             <section>
                 <article>
-                    <button wire:click="guardar_registros" type="button" class="p-2 mt-3 text-white bg-slate-700 duration-150 transition-ease-in-out hover:bg-slate-600 disabled:bg-slate-300" @disabled(!$data_api)>Guardar registro en base de datos</button>
+                    <button wire:click="guardar_registros" type="button" class="p-3 mt-3 text-white bg-green-600 duration-150 transition-ease-in-out rounded-md hover:bg-green-800 disabled:bg-green-300" @disabled(!$data_api)>Guardar registro en base de datos</button>
                 </article>
             </section>
         </div>

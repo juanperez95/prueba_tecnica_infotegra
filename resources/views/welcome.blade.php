@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Prueba tecnica</title>
+    <title>Prueba tecnica infotegra</title>
     @livewireStyles
     @wireUiScripts
 </head>
-<body>
+<body class="">
     @livewireScripts
     <section>
         <article>
-            <article class="flex flex-row justify-center items-center bg-slate-800">
-                <h2 class="text-4xl text-center p-5 text-white">Bienvenido a la API de Rick and Morty</h2>
+            <article class="flex flex-row justify-center items-center bg-black">
+                <img src="{{asset('assets/title.png')}}" alt="title" class="size-50 w-100 h-30">
             </article>
             <section class="p-2 mt-10">
                 <section class="grid grid-cols-2">
@@ -31,8 +31,23 @@
                         </x-alert>
                     </article>
                 </section>
-                {{-- Llamar al componente de la table 'PersonajesTAble' --}}
-                @livewire('personajes-table')
+                {{-- Llamar al componente de la table 'PersonajesTAble' y organizarlo en columnas --}}
+                <section class="overflow-x-auto p-4 grid grid-cols-3">
+
+                    {{--Tabla--}}
+                    @if(!$data_api)
+                        <article class="col-span-2">
+                            @livewire('personajes-table')               
+                        </article>
+                    @else
+                        <article class="col-span-2">
+                            @livewire('api-table')
+                        </article>
+                    @endif
+
+                </section>
+
+
             </section>
         </article>
     </section>
