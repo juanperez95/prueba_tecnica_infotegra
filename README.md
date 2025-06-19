@@ -54,3 +54,9 @@ composer run dev
 
 6. Abrir el navegador en http://localhost:8000  
 ## Listo corriendo
+
+
+---
+# Nota :
+
+- Este proyecto solo tiene como fin presentar una prueba tecnica de la API de Rick and Morty
