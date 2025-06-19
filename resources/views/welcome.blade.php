@@ -14,7 +14,11 @@
 </head>
 <body class="">
     @livewireScripts
-    <section>
+    {{--Imagen de fondo --}}
+    <section class="fondo">
+
+    </section>
+    <section class="content">
         <article>
             {{--titulo en la barra inicial--}}
             <article class="flex flex-row justify-center items-center bg-black">
@@ -32,38 +36,45 @@
                     <article class="p-3 mt-3">
                         <x-alert title="Informacion de consulta a datos" info>
                             @if(!$data_api)
-                                <x-alert title="Usando base de datos" positive></x-alert>
+                                <x-alert title="Usando base de datos"></x-alert>
                                 
                             @else
-                                <x-alert title="Usando API" positive solid></x-alert>
+                                <x-alert title="Usando API"></x-alert>
                             @endif
                         </x-alert>
                     </article>
                 </section>
                 {{-- Llamar al componente de la table 'PersonajesTAble' y organizarlo en columnas --}}
-                <section class="overflow-x-auto p-4 grid grid-cols-3">
+                <section class="overflow-x-auto p-2 grid grid-cols-3">
 
                     {{--Tabla--}}
                     @if(!$data_api)
-                        <article class="col-span-2">
+                        <article class="xl:col-span-2 col-span-3">
                             @livewire('personajes-table')               
                         </article>
                     @else
-                        <article class="col-span-2">
+                        <article class="xl:col-span-2 col-span-3">
                             @livewire('api-table')
                         </article>
                     @endif
 
                     {{--Imagenes laterales--}}
-                    <article class="flex flex-col justify-center items-center">
-                        <img src="{{asset('assets/portal.jpg')}}" alt="imagen lateral" class="portal xl:size-80 sm:size-40 size-20">
-                        <img src="{{asset('assets/nave.png')}}" alt="imagen lateral" class="mt-30 xl:size-40 sm:size-30 size-20 nave">
-                    </article>
+                    
                 </section>
 
 
             </section>
         </article>
     </section>
+    {{--Seccion para el pie de pagina--}}
+    <section class="bg-black text-white h-33 flex justify-center items-center">
+        <article class="text-white p-5 flex flex-col justify-between items-center gap-10">
+            {{--Imagen de infotegra para citar quien hace la prueba tecnica--}}
+            <a href="https://www.infotegra.com/" target="_blank">
+                <img src="{{asset('assets/infotegra.png')}}" alt="infotegra" class="">
+            </a>
+        </article>
+    </section>
+    <script src="{{asset('js/scroll.js')}}"></script> {{--Llamar archivo js para scroll--}}
 </body>
 </html>

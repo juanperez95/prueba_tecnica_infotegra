@@ -57,7 +57,7 @@ final class PersonajesTable extends PowerGridComponent
             ->add('name')
             ->add('status')
             ->add('species')
-            ->add('image', fn ($personaje) => "<img src='{$personaje->image}' alt='Personaje' class='w-15 h-15 rounded-full' />");
+            ->add('image', fn ($personaje) => "<img src='{$personaje->image}' alt='Personaje' class='w-15 h-15 rounded-full imagenes' />");
     }
 
     public function columns(): array

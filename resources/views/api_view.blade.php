@@ -23,7 +23,7 @@
         </article>
     </section>
     {{--Seccion principal para tener el orden de la pagina--}}
-    <section class="grid grid-cols-2 gap-3 p-10">
+    <section class="grid md:grid-cols-2 grid-cols-1 gap-3 p-10">
         <section class="flex justify-center items-center p-6">
             <img src="{{$personaje->image}}" alt="{{$personaje->name}}" class="w-60 h-60 rounded-full imagenes" />
             <h2 class="text-2xl text-center m-10">{{$personaje->name}}</h2>

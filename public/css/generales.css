@@ -88,3 +88,18 @@ body{
         transform: translateY(0px);
     }
 }
+
+/*  Fondo de imagen  */
+.fondo {
+    background-image: url('../assets/background.webp'); /*  Cargar webp para mas rendimiento */
+    background-size: cover;
+    background-attachment: fixed; /* ¡Clave para el efecto! */
+    background-position: center;
+    height: 85vh; /* Altura completa de la pantalla */
+    width: 100%;
+}
+
+.content {
+    height: 200vh; /* Contenido para hacer scroll */
+    background: white; /* Fondo del contenido */
+}
